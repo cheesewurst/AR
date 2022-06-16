@@ -1,0 +1,59 @@
+<html>
+
+<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+<script src="interaction.js"></script>
+
+<script>
+
+function event2()
+{
+  document.getElementsByTagName('a-entity')[0].setAttribute("text", "value: Click the green \n to gen a new \n password");
+}
+
+function event1()
+{
+  const userAction = async () => {
+        const response = await fetch('https://api.esie.nl/v1/password');
+        const myJson = await response.json(); 
+        console.log(myJson);
+        document.getElementsByTagName('a-entity')[0].setAttribute("text", "value: " + myJson + "\n Times generated new \n password: " + counting());
+        WriteToCSV(myJson);
+  }
+  userAction();
+}
+</script>
+
+<body style="margin:0; overflow:hidden;"> 
+  <a-scene embedded arjs cursor="rayOrigin: mouse" accepts-clicks>
+    <a-marker preset="hiro" registerevents>
+              <a-entity id="button" 
+              rotation="-90.00"
+              geometry="primitive: plane; height: 1; width: 1"
+              material="color: black" 
+              text="value: Click green box for a \n new password!; color: white; align: center; width:2.5; height: 2.5" 
+              position="0 0 0"
+              ></a-entity>
+              <a-box
+              id="box"
+              color="red"
+              position="-1.3, 1.3"
+              onclick='event2()'>
+              </a-box>
+              <a-box
+              id="box2"
+                color="green"
+                position="1.3, 1.3"
+                onclick="event1()">
+              </a-box>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+
+
+</body>
+</html>
+
+
