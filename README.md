@@ -1,2 +1,2 @@
 # AR
-Ar with a-frame and AR.js
+This program uses AFRAME and AR.js to scan a marker (in my case the "hiro" marker), and shows you sort of menu to generate true random 16 char passwords. These are gethered from the esie RNG API.
